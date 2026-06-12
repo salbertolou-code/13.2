@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para María · 20 años</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lato:wght@300;400&family=Great+Vibes&display=swap" rel="stylesheet">
+
+<style>
+
+/* ─── RESET ─── */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* ─── RAÍCES DE COLOR ─── */
+:root {
+  --bg:         #f5f0ea;
+  --bg-card:    #faf7f3;
+  --ink:        #2a1f18;
+  --ink-soft:   #5a4a3e;
+  --gold:       #b5832a;
+  --gold-light: #c9943a;
+  --gold-pale:  #e8c87a;
+  --rose:       #a06050;
+  --teal:       #4a8a7e;
+  --teal-dark:  #2e6b60;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Lato', sans-serif;
+  font-weight: 300;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ─── BURBUJAS ─── */
+.bubbles {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.bubble {
+  position: absolute;
+  bottom: -120px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, rgba(74,138,126,0.12), rgba(74,138,126,0.02));
+  border: 1px solid rgba(74,138,126,0.18);
+  animation: rise linear infinite;
+}
+
+@keyframes rise {
+  0%   { transform: translateY(0) translateX(0) scale(1);   opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 0.6; }
+  100% { transform: translateY(-110vh) translateX(30px) scale(1.1); opacity: 0; }
+}
+
+.bubble:nth-child(1)  { left:  8%; width: 18px; height: 18px; animation-duration: 14s; animation-delay:  0s; }
+.bubble:nth-child(2)  { left: 20%; width: 10px; height: 10px; animation-duration: 18s; animation-delay:  3s; }
+.bubble:nth-child(3)  { left: 35%; width: 24px; height: 24px; animation-duration: 16s; animation-delay:  6s; }
+.bubble:nth-child(4)  { left: 50%; width: 14px; height: 14px; animation-duration: 20s; animation-delay:  1s; }
+.bubble:nth-child(5)  { left: 63%; width: 20px; height: 20px; animation-duration: 13s; animation-delay:  8s; }
+.bubble:nth-child(6)  { left: 75%; width:  8px; height:  8px; animation-duration: 17s; animation-delay:  4s; }
+.bubble:nth-child(7)  { left: 88%; width: 16px; height: 16px; animation-duration: 15s; animation-delay:  2s; }
+.bubble:nth-child(8)  { left: 14%; width: 12px; height: 12px; animation-duration: 22s; animation-delay:  9s; }
+.bubble:nth-child(9)  { left: 55%; width: 22px; height: 22px; animation-duration: 19s; animation-delay:  5s; }
+.bubble:nth-child(10) { left: 42%; width:  9px; height:  9px; animation-duration: 12s; animation-delay:  7s; }
+
+/* ══════════════════════════════════════
+   PANTALLA DE CONTRASEÑA
+══════════════════════════════════════ */
+#pantalla-password {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+}
+
+.password-box {
+  text-align: center;
+  padding: 60px 50px;
+  max-width: 420px;
+  width: 90%;
+  position: relative;
+}
+
+.password-box::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), var(--teal), var(--gold), transparent);
+}
+
+.password-box::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--teal), var(--gold), var(--teal), transparent);
+}
+
+.pass-eyebrow {
+  font-size: 0.65rem;
+  letter-spacing: 0.38em;
+  color: var(--teal);
+  text-transform: uppercase;
+  margin-bottom: 28px;
+  opacity: 0.8;
+}
+
+.pass-title {
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(2.8rem, 8vw, 4rem);
+  color: var(--gold-light);
+  line-height: 1.15;
+  margin-bottom: 10px;
+}
+
+.pass-sub {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+  margin-bottom: 44px;
+  line-height: 1.7;
+}
+
+.pass-input-wrap {
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.pass-input {
+  width: 100%;
+  padding: 14px 20px;
+  background: transparent;
+  border: 1px solid rgba(181,131,42,0.35);
+  border-radius: 2px;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem;
+  letter-spacing: 0.5em;
+  text-align: center;
+  color: var(--ink);
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.pass-input:focus {
+  border-color: var(--gold);
+}
+
+.pass-input.error {
+  border-color: var(--rose);
+  animation: shake 0.4s ease;
+}
+
+@keyframes shake {
+  0%,100% { transform: translateX(0); }
+  20%      { transform: translateX(-8px); }
+  40%      { transform: translateX(8px); }
+  60%      { transform: translateX(-5px); }
+  80%      { transform: translateX(5px); }
+}
+
+.pass-error-msg {
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  color: var(--rose);
+  text-transform: uppercase;
+  opacity: 0;
+  transition: opacity 0.3s;
+  margin-top: 10px;
+  height: 16px;
+}
+
+.pass-error-msg.visible { opacity: 1; }
+
+.pass-btn {
+  margin-top: 32px;
+  padding: 13px 40px;
+  background: transparent;
+  border: 1px solid rgba(181,131,42,0.5);
+  border-radius: 2px;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.36em;
+  text-transform: uppercase;
+  color: var(--gold);
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s;
+}
+
+.pass-btn:hover {
+  background: rgba(181,131,42,0.08);
+}
+
+.pass-ornament {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 36px auto 0;
+  max-width: 200px;
+}
+
+.pass-ornament span {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(181,131,42,0.3));
+}
+
+.pass-ornament span:last-child {
+  background: linear-gradient(90deg, rgba(181,131,42,0.3), transparent);
+}
+
+.pass-ornament .diamond {
+  width: 5px;
+  height: 5px;
+  background: var(--gold);
+  transform: rotate(45deg);
+  flex: none;
+  opacity: 0.6;
+}
+
+/* ══════════════════════════════════════
+   PANTALLA DEL SOBRE
+══════════════════════════════════════ */
+#pantalla-sobre {
+  position: fixed;
+  inset: 0;
+  z-index: 99;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+  flex-direction: column;
+  gap: 32px;
+}
+
+.sobre-hint {
+  font-size: 0.68rem;
+  letter-spacing: 0.34em;
+  color: var(--teal);
+  text-transform: uppercase;
+  opacity: 0;
+  transition: opacity 0.6s;
+}
+
+.sobre-hint.visible { opacity: 0.8; }
+
+/* SVG sobre */
+.sobre-wrapper {
+  width: 220px;
+  cursor: pointer;
+  position: relative;
+}
+
+.sobre-wrapper svg {
+  overflow: visible;
+  filter: drop-shadow(0 8px 24px rgba(181,131,42,0.15));
+}
+
+/* Tapa del sobre (triángulo superior) */
+#sobre-tapa {
+  transform-origin: top center;
+  transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* La carta dentro */
+#carta-interior {
+  transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1) 0.3s;
+  transform: translateY(0);
+}
+
+/* Estado abierto */
+.sobre-wrapper.abierto #sobre-tapa {
+  transform: rotateX(180deg);
+}
+
+.sobre-wrapper.abierto #carta-interior {
+  transform: translateY(-60px);
+}
+
+/* Animación de vuelo fuera de pantalla */
+@keyframes fly-up {
+  0%   { transform: translateY(0) scale(1); opacity: 1; }
+  100% { transform: translateY(-120vh) scale(0.6); opacity: 0; }
+}
+
+#pantalla-sobre.flying {
+  animation: fly-up 0.9s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* pulso suave en el sobre */
+@keyframes pulso {
+  0%,100% { transform: scale(1); }
+  50%      { transform: scale(1.03); }
+}
+
+.sobre-wrapper.esperando {
+  animation: pulso 2.2s ease-in-out infinite;
+}
+
+/* ══════════════════════════════════════
+   CARTA (oculta hasta que se abre el sobre)
+══════════════════════════════════════ */
+#contenido-carta {
+  display: none;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+#contenido-carta.visible {
+  display: block;
+  opacity: 1;
+}
+
+/* ─── WRAPPER CARTA ─── */
+.carta {
+  position: relative;
+  z-index: 1;
+  max-width: 820px;
+  margin: 60px auto 80px;
+  padding: 0 20px;
+}
+
+/* ─── SECCIÓN HERO ─── */
+.hero {
+  text-align: center;
+  padding: 80px 40px 60px;
+  background: linear-gradient(160deg, rgba(181,131,42,0.05) 0%, transparent 50%);
+  border: 1px solid rgba(181,131,42,0.25);
+  border-radius: 4px 4px 0 0;
+  border-bottom: none;
+  position: relative;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--gold), var(--teal), var(--gold), transparent);
+}
+
+.eyebrow {
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+  font-size: 0.7rem;
+  letter-spacing: 0.36em;
+  color: var(--teal);
+  text-transform: uppercase;
+  margin-bottom: 36px;
+  opacity: 0.85;
+}
+
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(3.2rem, 8vw, 6rem);
+  font-weight: 700;
+  line-height: 1;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+
+.hero-title em {
+  font-style: italic;
+  color: var(--gold-light);
+}
+
+.hero-sub {
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  color: var(--teal);
+  margin-top: 10px;
+  opacity: 0.9;
+}
+
+.divider-ornament {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 44px auto;
+  max-width: 340px;
+}
+
+.divider-ornament span {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(181,131,42,0.4));
+}
+
+.divider-ornament span:last-child {
+  background: linear-gradient(90deg, rgba(181,131,42,0.4), transparent);
+}
+
+.divider-ornament .diamond {
+  width: 7px;
+  height: 7px;
+  background: var(--gold);
+  transform: rotate(45deg);
+  flex: none;
+  opacity: 0.8;
+}
+
+.hero-name {
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(3.8rem, 10vw, 6.5rem);
+  color: var(--gold-light);
+  line-height: 1.1;
+  margin-bottom: 6px;
+}
+
+.hero-edad {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.3em;
+  color: var(--rose);
+  text-transform: uppercase;
+}
+
+/* ─── CUERPO DE LA CARTA ─── */
+.cuerpo {
+  border: 1px solid rgba(181,131,42,0.25);
+  border-top: none;
+  border-bottom: none;
+  padding: 0 60px;
+  background: rgba(250,247,243,0.8);
+}
+
+@media (max-width: 600px) { .cuerpo { padding: 0 28px; } }
+
+.apertura {
+  padding: 60px 0 50px;
+  text-align: center;
+  border-bottom: 1px solid rgba(181,131,42,0.15);
+}
+
+.apertura p {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.05rem, 2.5vw, 1.3rem);
+  line-height: 1.95;
+  color: var(--ink-soft);
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+.apertura p em {
+  font-style: italic;
+  color: var(--gold);
+}
+
+.plan {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  border-bottom: 1px solid rgba(181,131,42,0.15);
+}
+
+@media (max-width: 560px) { .plan { grid-template-columns: 1fr; } }
+
+.plan-item {
+  padding: 40px 30px;
+  text-align: center;
+  transition: background 0.3s;
+}
+
+.plan-item:hover { background: rgba(181,131,42,0.04); }
+
+.plan-item:first-child { border-right: 1px solid rgba(181,131,42,0.15); }
+
+@media (max-width: 560px) { .plan-item:first-child { border-right: none; border-bottom: 1px solid rgba(181,131,42,0.15); } }
+
+.plan-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.32em;
+  color: var(--teal);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.plan-value {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.3rem, 3vw, 1.8rem);
+  color: var(--ink);
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.plan-note {
+  font-size: 0.8rem;
+  color: var(--rose);
+  margin-top: 8px;
+  opacity: 0.8;
+}
+
+.foto-wrap {
+  position: relative;
+  margin: 50px 0;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.foto-wrap img,
+.foto-placeholder {
+  width: 100%;
+  height: 340px;
+  object-fit: cover;
+  display: block;
+  filter: brightness(0.75) saturate(0.85);
+}
+
+.foto-placeholder {
+  background:
+    linear-gradient(160deg, rgba(74,138,126,0.3) 0%, rgba(26,10,14,0.9) 60%),
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 40px,
+      rgba(201,148,58,0.04) 40px,
+      rgba(201,148,58,0.04) 41px
+    );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.foto-placeholder span {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 1.1rem;
+  color: rgba(247,232,204,0.4);
+  letter-spacing: 0.1em;
+}
+
+.foto-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(18,6,8,0.7) 0%, transparent 50%);
+}
+
+.foto-caption {
+  position: absolute;
+  bottom: 22px;
+  left: 28px;
+  font-size: 0.68rem;
+  letter-spacing: 0.28em;
+  color: rgba(247,232,204,0.65);
+  text-transform: uppercase;
+}
+
+.incluye-titulo {
+  text-align: center;
+  padding: 50px 0 40px;
+  border-bottom: 1px solid rgba(201,148,58,0.1);
+}
+
+.incluye-titulo .label {
+  font-size: 0.65rem;
+  letter-spacing: 0.36em;
+  color: var(--teal);
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.incluye-titulo h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  font-weight: 600;
+  color: var(--cream);
+}
+
+.incluye-titulo h2 em {
+  color: var(--gold-light);
+  font-style: italic;
+}
+
+.experiencias {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1px;
+  border-bottom: 1px solid rgba(201,148,58,0.1);
+}
+
+@media (max-width: 600px) { .experiencias { grid-template-columns: 1fr; } }
+
+.exp {
+  padding: 38px 26px;
+  border-right: 1px solid rgba(201,148,58,0.08);
+  transition: background 0.3s;
+  text-align: center;
+}
+
+.exp:last-child { border-right: none; }
+.exp:hover { background: rgba(127,181,168,0.04); }
+
+.exp-icon {
+  font-size: 1.8rem;
+  margin-bottom: 16px;
+  display: block;
+}
+
+.exp-titulo {
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+  color: var(--gold-light);
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.22em;
+}
+
+.exp p {
+  font-size: 0.92rem;
+  color: var(--cream-soft);
+  line-height: 1.85;
+}
+
+.franja {
+  padding: 48px 0;
+  text-align: center;
+  border-bottom: 1px solid rgba(201,148,58,0.1);
+}
+
+.franja-script {
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(2.2rem, 6vw, 3.6rem);
+  color: var(--gold-light);
+  line-height: 1.3;
+}
+
+.franja-body {
+  margin-top: 20px;
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: clamp(0.95rem, 2vw, 1.1rem);
+  color: var(--rose);
+  line-height: 1.9;
+  max-width: 460px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.lugar {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  border-bottom: 1px solid rgba(201,148,58,0.1);
+}
+
+@media (max-width: 560px) { .lugar { grid-template-columns: 1fr; } }
+
+.lugar-img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  filter: brightness(0.6) saturate(0.7);
+  display: block;
+}
+
+.lugar-info {
+  padding: 40px 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 14px;
+}
+
+.lugar-label {
+  font-size: 0.62rem;
+  letter-spacing: 0.34em;
+  color: var(--teal);
+  text-transform: uppercase;
+}
+
+.lugar-nombre {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  font-weight: 600;
+  color: var(--cream);
+  line-height: 1.25;
+}
+
+.lugar-desc {
+  font-size: 0.9rem;
+  color: var(--cream-soft);
+  line-height: 1.85;
+}
+
+.lugar-tag {
+  display: inline-block;
+  border: 1px solid rgba(127,181,168,0.35);
+  color: var(--teal);
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  padding: 5px 14px;
+  border-radius: 2px;
+  text-transform: uppercase;
+  width: fit-content;
+}
+
+.cierre {
+  padding: 70px 0 60px;
+  text-align: center;
+}
+
+.cierre-texto {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  color: var(--cream-soft);
+  line-height: 2;
+  max-width: 520px;
+  margin: 0 auto 40px;
+}
+
+.cierre-texto em {
+  color: var(--gold-pale);
+  font-style: normal;
+}
+
+.firma {
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(3rem, 8vw, 4.8rem);
+  color: var(--gold-light);
+  line-height: 1.1;
+  margin-bottom: 8px;
+}
+
+.firma-nota {
+  font-size: 0.7rem;
+  letter-spacing: 0.26em;
+  color: rgba(247,232,204,0.4);
+  text-transform: uppercase;
+}
+
+.pie {
+  text-align: center;
+  padding: 24px 40px 30px;
+  border: 1px solid rgba(201,148,42,0.22);
+  border-top: none;
+  border-radius: 0 0 4px 4px;
+  position: relative;
+}
+
+.pie::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--teal), var(--gold), var(--teal), transparent);
+}
+
+.pie p {
+  font-size: 0.65rem;
+  letter-spacing: 0.28em;
+  color: rgba(247,232,204,0.3);
+  text-transform: uppercase;
+}
+
+.fade-in {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.85s ease, transform 0.85s ease;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: none;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- Burbujas de fondo -->
+<div class="bubbles" aria-hidden="true">
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+</div>
+
+<!-- ══════════════════════════════════════
+     PANTALLA 1 · CONTRASEÑA
+══════════════════════════════════════ -->
+<div id="pantalla-password">
+  <div class="password-box">
+    <p class="pass-eyebrow">Solo para ti</p>
+    <p class="pass-title">Para María</p>
+    <p class="pass-sub">Este sobre tiene tu nombre.<br>Introduce la clave para abrirlo.</p>
+
+    <div class="pass-input-wrap">
+      <input
+        id="pass-input"
+        class="pass-input"
+        type="password"
+        maxlength="6"
+        autocomplete="off"
+        inputmode="numeric"
+        placeholder="· · ·"
+      >
+    </div>
+    <p id="pass-error" class="pass-error-msg">Inténtalo de nuevo</p>
+
+    <button class="pass-btn" id="pass-btn">Abrir</button>
+
+    <div class="pass-ornament">
+      <span></span>
+      <div class="diamond"></div>
+      <span></span>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     PANTALLA 2 · SOBRE ANIMADO
+══════════════════════════════════════ -->
+<div id="pantalla-sobre">
+  <p class="sobre-hint" id="sobre-hint">Toca el sobre para abrirlo</p>
+
+  <div class="sobre-wrapper esperando" id="sobre" title="Abre tu regalo">
+    <svg viewBox="0 0 220 160" xmlns="http://www.w3.org/2000/svg" width="220" height="160">
+      <defs>
+        <linearGradient id="sobreGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#faf7f3"/>
+          <stop offset="100%" stop-color="#f0e8d8"/>
+        </linearGradient>
+        <linearGradient id="tapaGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#f0e8d8"/>
+          <stop offset="100%" stop-color="#e8d8c0"/>
+        </linearGradient>
+      </defs>
+
+      <!-- Cuerpo del sobre -->
+      <rect x="8" y="40" width="204" height="114" rx="3" fill="url(#sobreGrad)" stroke="rgba(181,131,42,0.4)" stroke-width="1"/>
+
+      <!-- Triángulos laterales inferiores (líneas en V del interior) -->
+      <line x1="8" y1="154" x2="110" y2="90" stroke="rgba(181,131,42,0.2)" stroke-width="0.8"/>
+      <line x1="212" y1="154" x2="110" y2="90" stroke="rgba(181,131,42,0.2)" stroke-width="0.8"/>
+
+      <!-- Carta interior (asoma al abrirse) -->
+      <g id="carta-interior">
+        <rect x="48" y="28" width="124" height="80" rx="2" fill="#fdf9f4" stroke="rgba(181,131,42,0.5)" stroke-width="0.8"/>
+        <!-- línea dorada superior de la carta -->
+        <line x1="48" y1="31" x2="172" y2="31" stroke="rgba(181,131,42,0.6)" stroke-width="1.5"/>
+        <!-- texto decorativo simulado -->
+        <line x1="64" y1="52" x2="156" y2="52" stroke="rgba(181,131,42,0.25)" stroke-width="1"/>
+        <line x1="72" y1="62" x2="148" y2="62" stroke="rgba(181,131,42,0.18)" stroke-width="0.8"/>
+        <line x1="68" y1="72" x2="152" y2="72" stroke="rgba(181,131,42,0.18)" stroke-width="0.8"/>
+        <!-- corazón central -->
+        <text x="110" y="95" text-anchor="middle" font-size="14" fill="rgba(160,96,80,0.7)">♡</text>
+      </g>
+
+      <!-- Tapa del sobre (triángulo superior) -->
+      <g id="sobre-tapa">
+        <polygon points="8,40 212,40 110,108" fill="url(#tapaGrad)" stroke="rgba(181,131,42,0.4)" stroke-width="1"/>
+        <!-- sello dorado en el centro de la tapa -->
+        <circle cx="110" cy="80" r="12" fill="none" stroke="rgba(181,131,42,0.5)" stroke-width="0.8"/>
+        <text x="110" y="85" text-anchor="middle" font-size="12" fill="rgba(181,131,42,0.7)">♡</text>
+      </g>
+
+    </svg>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     PANTALLA 3 · LA CARTA (original intacta)
+══════════════════════════════════════ -->
+<div id="contenido-carta">
+
+<main class="carta">
+
+  <!-- ── HERO ── -->
+  <header class="hero fade-in">
+    <p class="eyebrow">Una invitación para ti</p>
+
+    <h1 class="hero-title">
+      Un día<br><em>sin prisa</em>
+    </h1>
+
+    <p class="hero-sub">para los dos</p>
+
+    <div class="divider-ornament">
+      <span></span>
+      <div class="diamond"></div>
+      <span></span>
+    </div>
+
+    <p class="hero-name">María</p>
+    <p class="hero-edad">Veinte años · Con todo mi amor</p>
+  </header>
+
+  <!-- ── CUERPO ── -->
+  <div class="cuerpo">
+
+    <!-- Apertura -->
+    <section class="apertura fade-in">
+      <p>
+        Porque llevas meses dando el todo de ti misma,<br>
+        porque te mereces que alguien te diga <em>para y respira</em>,<br>
+        y porque cumplir veinte años es una razón perfecta<br>
+        para escaparse juntos a un sitio donde el tiempo va<br>
+        al ritmo del agua.
+      </p>
+    </section>
+
+    <!-- Plan -->
+    <div class="plan fade-in">
+      <div class="plan-item">
+        <p class="plan-label">Fecha</p>
+        <p class="plan-value">La que tú elijas</p>
+        <p class="plan-note">Lo organizamos juntos</p>
+      </div>
+      <div class="plan-item">
+        <p class="plan-label">Duración</p>
+        <p class="plan-value">Un día entero</p>
+        <p class="plan-note">Solo para nosotros</p>
+      </div>
+    </div>
+
+    <!-- Foto balneario -->
+    <div class="foto-wrap fade-in">
+      <img
+        src="https://balneariodearino.com/wp-content/uploads/2022/11/instalaciones-balneario-arino.jpg"
+        alt="Balneario de Ariño"
+        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+      >
+      <div class="foto-placeholder" style="display:none; height:340px;">
+        <span>Balneario de Ariño · Teruel</span>
+      </div>
+      <div class="foto-overlay"></div>
+      <p class="foto-caption">Balneario de Ariño · Teruel</p>
+    </div>
+
+    <!-- Qué incluye -->
+    <section class="incluye-titulo fade-in">
+      <p class="label">Lo que te espera</p>
+      <h2>Una experiencia <em>hecha para ti</em></h2>
+    </section>
+
+    <div class="experiencias fade-in">
+      <div class="exp">
+        <span class="exp-icon">♨️</span>
+        <p class="exp-titulo">Aguas Termales</p>
+        <p>Circuito spa completo con piscinas termales, chorros y zona de relajación.</p>
+      </div>
+      <div class="exp">
+        <span class="exp-icon">🌿</span>
+        <p class="exp-titulo">Calma total</p>
+        <p>Sin móvil, sin relojes. Solo el sonido del agua y el tiempo que no corre.</p>
+      </div>
+      <div class="exp">
+        <span class="exp-icon">🤍</span>
+        <p class="exp-titulo">Tiempo juntos</p>
+        <p>El mejor plan es el que hacemos los dos, sin prisas y sin excusas.</p>
+      </div>
+    </div>
+
+    <!-- Franja romántica -->
+    <div class="franja fade-in">
+      <p class="franja-script">Felices veinte, amor</p>
+      <p class="franja-body">
+        Que este sea el primero de muchos años en los que<br>
+        sigamos buscando rincones nuevos juntos.
+      </p>
+    </div>
+
+    <!-- Lugar -->
+    <div class="lugar fade-in">
+      <img
+        src="https://balneariodearino.com/wp-content/uploads/2023/07/balneario-arino-spa.jpg"
+        alt="Spa del Balneario de Ariño"
+        class="lugar-img"
+        onerror="this.style.background='rgba(74,138,126,0.15)'; this.style.display='block';"
+      >
+      <div class="lugar-info">
+        <p class="lugar-label">El lugar</p>
+        <h3 class="lugar-nombre">Balneario<br>de Ariño</h3>
+        <p class="lugar-desc">
+          
+        </p>
+        <span class="lugar-tag">Ariño · Teruel · Aragón</span>
+      </div>
+    </div>
+
+    <!-- Cierre -->
+    <div class="cierre fade-in">
+      <p class="cierre-texto">
+        
+      </p>
+      <p class="firma">Con todo mi amor</p>
+      <p class="firma-nota">Tu regalo de cumpleaños · 2025</p>
+    </div>
+
+  </div><!-- /cuerpo -->
+
+  <!-- ── PIE ── -->
+  <footer class="pie">
+    <p>SPA DAY FOR TWO · BALNEARIO DE ARIÑO · FELICES 20, MARÍA ♡</p>
+  </footer>
+
+</main>
+
+</div><!-- /contenido-carta -->
+
+<script>
+// ── CONTRASEÑA ──
+const CLAVE = '13';
+
+const inputEl   = document.getElementById('pass-input');
+const btnEl     = document.getElementById('pass-btn');
+const errorEl   = document.getElementById('pass-error');
+const pantallaPass  = document.getElementById('pantalla-password');
+const pantallaSobre = document.getElementById('pantalla-sobre');
+const sobreHint     = document.getElementById('sobre-hint');
+const sobreEl       = document.getElementById('sobre');
+const cartaEl       = document.getElementById('contenido-carta');
+
+function verificar() {
+  if (inputEl.value.trim() === CLAVE) {
+    pantallaPass.style.transition = 'opacity 0.6s ease';
+    pantallaPass.style.opacity = '0';
+    setTimeout(() => {
+      pantallaPass.style.display = 'none';
+      mostrarSobre();
+    }, 600);
+  } else {
+    inputEl.classList.add('error');
+    errorEl.classList.add('visible');
+    inputEl.value = '';
+    setTimeout(() => {
+      inputEl.classList.remove('error');
+      errorEl.classList.remove('visible');
+    }, 1800);
+  }
+}
+
+btnEl.addEventListener('click', verificar);
+inputEl.addEventListener('keydown', e => { if (e.key === 'Enter') verificar(); });
+
+// ── SOBRE ──
+function mostrarSobre() {
+  pantallaSobre.style.display = 'flex';
+  pantallaSobre.style.opacity = '0';
+  pantallaSobre.style.transition = 'opacity 0.7s ease';
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      pantallaSobre.style.opacity = '1';
+      setTimeout(() => sobreHint.classList.add('visible'), 400);
+    });
+  });
+}
+
+sobreEl.addEventListener('click', abrirSobre);
+sobreEl.addEventListener('touchend', e => { e.preventDefault(); abrirSobre(); });
+
+let yaAbierto = false;
+
+function abrirSobre() {
+  if (yaAbierto) return;
+  yaAbierto = true;
+
+  sobreEl.classList.remove('esperando');
+  sobreHint.classList.remove('visible');
+  sobreEl.classList.add('abierto');
+
+  // tras la animación de apertura, volar hacia arriba
+  setTimeout(() => {
+    pantallaSobre.classList.add('flying');
+    setTimeout(() => {
+      pantallaSobre.style.display = 'none';
+      mostrarCarta();
+    }, 900);
+  }, 900);
+}
+
+function mostrarCarta() {
+  cartaEl.style.display = 'block';
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      cartaEl.classList.add('visible');
+      iniciarObserver();
+    });
+  });
+}
+
+function iniciarObserver() {
+  const observer = new IntersectionObserver(
+    entries => entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    }),
+    { threshold: 0.12 }
+  );
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+}
+</script>
+
+</body>
+</html>
